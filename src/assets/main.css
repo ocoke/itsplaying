@@ -18,8 +18,11 @@
 }
 
 .mp-now .meta {
-  margin-right: 7rem;
-  text-align: center;
+  /* margin-right: 7rem; */
+  /* text-align: center; */
+  display: flex;
+  justify-content: center;
+  margin-left: 1rem;
 }
 .mp-now .cover {
   @apply flex justify-center items-center;

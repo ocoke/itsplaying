@@ -12,7 +12,7 @@
         />
       </div>
       <div class="meta w-1/2">
-        <div>
+        <div style="width: 100%;">
           <div class="track-title" ref="trackTitle">{{ data.item.name }}</div>
           <div class="track-artists" ref="trackArtists">
             <span v-for="(i, index) in data.item.artists" v-bind:key="i"
