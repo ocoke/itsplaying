@@ -26,10 +26,10 @@
 }
 
 .mp-now .track-title {
-  @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold;
+  @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold;
 }
 .mp-now .track-artists {
-  @apply text-xl sm:text-2xl md:text-3xl lg:text-4xl mt-6 opacity-65;
+  @apply text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl mt-6 opacity-65;
 }
 .mp-now img {
   max-width: 100%;
