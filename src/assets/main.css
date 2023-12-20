@@ -9,7 +9,7 @@
 }
 
 .mp-now {
-  @apply block md:flex md:h-screen items-center pb-8 cursor-default px-3;
+  @apply block md:flex md:h-screen items-center pb-3 cursor-default px-3;
   width: 100vw;
   overflow: hidden;
   max-width: 100%;
