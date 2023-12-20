@@ -25,7 +25,7 @@ main {
 }
 
 .mp-now .meta {
-  @apply mt-8 mr-12 sm:mt-0 sm:ml-4;
+  @apply mt-8 mr-12 ml-1.5 sm:mt-0 sm:ml-4;
   /* margin-right: 3rem; */
   /* text-align: center; */
   display: flex;
