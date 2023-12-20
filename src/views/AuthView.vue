@@ -23,7 +23,7 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 // can replace with your own client id
 const clientId = 'ec175b1073e64c099e8e0156532c7cb6'
-const redirectUri = 'https://curly-space-tribble-5577wg9j4r7f7wrj-5173.app.github.dev/auth'
+const redirectUri = 'https://itsplaying.proj.sbs/auth'
 
 const scope = 'user-read-currently-playing user-read-playback-state'
 const authUrl = new URL('https://accounts.spotify.com/authorize')

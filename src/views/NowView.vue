@@ -9,6 +9,15 @@
                 <div class="track-artists" ref="trackArtists"><span v-for="(i, index) in data.item.artists" v-bind:key="i">{{ i.name }}<span v-if="index != data.item.artists.length - 1">,&nbsp;</span></span></div>
             </div>
         </div>
+        <div v-else class="mp-now">
+            <div class="cover w-1/2">
+                <img src="https://sdfsdf.dev/100x100.jpg,F3F4F6,transparent" alt="album cover" ref="img" crossorigin="anonymous" width="480" height="480"/>
+            </div>
+            <div class="meta w-1/2">
+                <div class="track-title" ref="trackTitle">Not playing</div>
+                <!-- <div class="track-artists" ref="trackArtists"><span v-for="(i, index) in data.item.artists" v-bind:key="i">{{ i.name }}<span v-if="index != data.item.artists.length - 1">,&nbsp;</span></span></div> -->
+            </div>
+        </div>
     </main>
 </template>
 
@@ -26,7 +35,9 @@ data.value = await fetch(apiUrl, {
     headers: {
         'Authorization': auths
     }
-}).then(response => response.json())
+}).then(response => response.text()).then(text => text ? JSON.parse(text) : {})
+
+
 
 
 console.log(data.value)
@@ -114,7 +125,7 @@ setInterval(async () => {
         headers: {
             'Authorization': auths
         }
-    }).then(response => response.json())
+    }).then(response => response.text()).then(text => text ? JSON.parse(text) : {})
 
 
     
