@@ -18,7 +18,8 @@
 }
 
 .mp-now .meta {
-  margin-right: 3rem;
+  margin-right: 6rem;
+  text-align: center;
 }
 .mp-now .cover {
   @apply flex justify-center items-center;
