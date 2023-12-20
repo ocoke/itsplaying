@@ -61,6 +61,8 @@ data.value = await fetch(apiUrl, {
 
 console.log(data.value)
 
+document.title = (data.value.item ? data.value.item.name + ' by ' + data.value.artists[0] : 'Not playing') + ' | itsplaying'
+
 const colorThief = new ColorThief()
 
 const pickTextColor = (bgColor, lightColor, darkColor) => {
@@ -124,6 +126,7 @@ const getRefreshToken = async () => {
   }
   const body = await fetch(url, payload)
   const response = await body.json()
+  
 
   if (response && response.error) {
     // handle error
@@ -150,6 +153,9 @@ setInterval(async () => {
   })
     .then((response) => response.text())
     .then((text) => (text ? JSON.parse(text) : {}))
+
+  document.title = (data.value.item ? data.value.item.name + ' by ' + data.value.artists[0] : 'Not playing') + ' | itsplaying'
+
 
   // img.value.addEventListener('load', function() {
   //     const color = colorThief.getColor(img.value)
