@@ -9,16 +9,23 @@
 }
 
 .mp-now {
-  @apply flex items-center pb-8 cursor-default px-3;
-  backdrop-filter: brightness(0.95);
-  height: 100vh;
+  @apply block md:flex md:h-screen items-center pb-8 cursor-default px-3;
   width: 100vw;
   overflow: hidden;
   max-width: 100%;
   user-select: none;
 }
 
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  backdrop-filter: brightness(0.98);
+}
+
 .mp-now .meta {
+  @apply mt-12 mr-12 ml-12 md:mt-0 md:ml-4;
   margin-right: 3rem;
   /* text-align: center; */
   display: flex;
