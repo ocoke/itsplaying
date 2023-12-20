@@ -61,7 +61,7 @@ data.value = await fetch(apiUrl, {
 
 console.log(data.value)
 
-document.title = (data.value.item ? data.value.item.name + ' by ' + data.value.item.artists[0] : 'Not playing') + ' | itsplaying'
+document.title = (data.value.item ? data.value.item.name + ' by ' + data.value.item.artists[0].name : 'Not playing') + ' | itsplaying'
 
 const colorThief = new ColorThief()
 
@@ -154,7 +154,7 @@ setInterval(async () => {
     .then((response) => response.text())
     .then((text) => (text ? JSON.parse(text) : {}))
 
-  document.title = (data.value.item ? data.value.item.name + ' by ' + data.value.item.artists[0] : 'Not playing') + ' | itsplaying'
+  document.title = (data.value.item ? data.value.item.name + ' by ' + data.value.item.artists[0].name : 'Not playing') + ' | itsplaying'
 
 
   // img.value.addEventListener('load', function() {
