@@ -9,7 +9,7 @@
 }
 
 .mp-now {
-  @apply flex items-center pb-8 cursor-default px-3;
+  @apply flex items-center pb-3 cursor-default px-3;
   backdrop-filter: brightness(0.95);
   height: 100vh;
   width: 100vw;
