@@ -9,7 +9,7 @@
 }
 
 .mp-now {
-  @apply block md:flex md:h-screen items-center pb-3 cursor-default px-3;
+  @apply block sm:flex sm:h-screen items-center pb-3 cursor-default px-3;
   width: 100vw;
   overflow: hidden;
   max-width: 100%;
@@ -25,12 +25,12 @@ main {
 }
 
 .mp-now .meta {
-  @apply mt-12 mr-12 ml-12 md:mt-0 md:ml-4;
-  margin-right: 3rem;
+  @apply mt-12 mr-12 ml-12 sm:mt-0 sm:ml-4;
+  /* margin-right: 3rem; */
   /* text-align: center; */
   display: flex;
   justify-content: center;
-  margin-left: 1rem;
+  /* margin-left: 1rem; */
 }
 .mp-now .cover {
   @apply flex justify-center items-center;

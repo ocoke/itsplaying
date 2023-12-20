@@ -1,7 +1,7 @@
 <template>
   <main>
     <div v-if="data.item" class="mp-now">
-      <div class="cover w-full md:w-1/2">
+      <div class="cover w-full sm:w-1/2">
         <img
           :src="data.item.album.images[0].url"
           alt="album cover"
