@@ -18,7 +18,7 @@
 }
 
 .mp-now .meta {
-  margin-right: 6rem;
+  margin-right: 7rem;
   text-align: center;
 }
 .mp-now .cover {
@@ -26,7 +26,7 @@
 }
 
 .mp-now .track-title {
-  @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold;
+  @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold;
 }
 .mp-now .track-artists {
   @apply text-xl sm:text-2xl md:text-3xl lg:text-4xl mt-6 opacity-65;
