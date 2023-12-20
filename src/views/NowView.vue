@@ -163,5 +163,5 @@ setInterval(async () => {
   //     document.body.style.backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`
   //     trackTitle.value.style.color = trackArtists.value.style.color = pickTextColor(color, '#FFFFFF', '#000000');
   // });
-}, 8000)
+}, 5000)
 </script>
