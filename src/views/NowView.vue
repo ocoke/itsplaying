@@ -1,7 +1,12 @@
 <template>
+  
   <main>
     <div v-if="data.item" class="mp-now">
+      <!-- <div class="user-text pb-12 pl-6" v-if="user">
+        <p>{{ user }} is playing:</p>
+      </div> -->
       <div class="cover w-full sm:w-1/2">
+       
         <img
           :src="data.item.album.images[0].url"
           alt="album cover"
@@ -23,9 +28,9 @@
       </div>
     </div>
     <div v-else class="mp-now">
-      <div class="cover w-1/2">
+      <div class="cover w-full sm:w-1/2">
         <img
-          src="https://sdfsdf.dev/100x100.jpg,F3F4F6,transparent"
+          src="/blank.jpg"
           alt="album cover"
           ref="img"
           crossorigin="anonymous"
@@ -33,17 +38,26 @@
           height="480"
         />
       </div>
-      <div class="meta w-1/2">
+      <div class="meta w-full sm:w-1/2">
         <div class="track-title" ref="trackTitle">Not playing</div>
         <!-- <div class="track-artists" ref="trackArtists"><span v-for="(i, index) in data.item.artists" v-bind:key="i">{{ i.name }}<span v-if="index != data.item.artists.length - 1">,&nbsp;</span></span></div> -->
       </div>
     </div>
+    
   </main>
+  <div class="copyright">
+    <p ref="copyright">Powered by <a href="https://github.com/ocoke/itsplaying">itsplaying</a></p>
+  </div>
 </template>
 
 <script setup>
 import { ref, watch } from 'vue'
 import ColorThief from 'colorthief'
+
+const urlParams = new URLSearchParams(window.location.search)
+let user = urlParams.get('user')
+
+
 const apiUrl = 'https://api.spotify.com/v1/me/player/currently-playing'
 const auths = 'Bearer ' + localStorage.getItem('access_token')
 
@@ -87,19 +101,25 @@ const pickTextColor = (bgColor, lightColor, darkColor) => {
 const img = ref()
 const trackTitle = ref()
 const trackArtists = ref()
+const copyright = ref()
 
 watch(img, () => {
-  // if (img.value.complete) {
-  //     const color = colorThief.getColor(img.value)
-  //     console.log(color)
-  //     document.body.style.backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`
-  //     trackTitle.value.style.color = trackArtists.value.style.color = pickTextColor(color, '#FFFFFF', '#000000');
-  // } else {
+  // change page icon
+  var link = document.querySelector("link[rel~='icon']");
+  if (!link) {
+      link = document.createElement('link');
+      link.rel = 'icon';
+      document.head.appendChild(link);
+  }
+  link.href = img.value.src
+
+  // change text color and page background color
+
   img.value.addEventListener('load', function () {
     const color = colorThief.getColor(img.value)
     console.log(color)
     document.body.style.backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`
-    trackTitle.value.style.color = trackArtists.value.style.color = pickTextColor(
+    trackTitle.value.style.color = trackArtists.value.style.color = copyright.value.style.color = pickTextColor(
       color,
       '#FFFFFF',
       '#000000'
@@ -155,13 +175,5 @@ setInterval(async () => {
     .then((text) => (text ? JSON.parse(text) : {}))
 
   document.title = (data.value.item ? data.value.item.name + ' by ' + data.value.item.artists[0].name : 'Not playing') + ' | itsplaying'
-
-
-  // img.value.addEventListener('load', function() {
-  //     const color = colorThief.getColor(img.value)
-  //     console.log(color)
-  //     document.body.style.backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`
-  //     trackTitle.value.style.color = trackArtists.value.style.color = pickTextColor(color, '#FFFFFF', '#000000');
-  // });
 }, 5000)
 </script>

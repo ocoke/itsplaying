@@ -9,10 +9,10 @@
 }
 
 .mp-now {
-  @apply block sm:flex sm:h-screen items-center pb-3 cursor-default px-3;
+  @apply block sm:flex sm:h-screen items-center pb-3 cursor-default px-3 max-w-sm sm:max-w-full;
   width: 100vw;
   overflow: hidden;
-  max-width: 100%;
+  /* max-width: 100%; */
   user-select: none;
 }
 
@@ -25,11 +25,12 @@ main {
 }
 
 .mp-now .meta {
-  @apply mt-12 mr-12 ml-12 sm:mt-0 sm:ml-4;
+  @apply mt-8 mr-12 sm:mt-0 sm:ml-4;
   /* margin-right: 3rem; */
   /* text-align: center; */
   display: flex;
   justify-content: center;
+  word-break: break-word;
   /* margin-left: 1rem; */
 }
 .mp-now .cover {
@@ -46,5 +47,24 @@ main {
 .mp-now img {
   max-width: 100%;
   overflow: hidden;
-  @apply w-2/3 rounded;
+  @apply w-full sm:w-2/3 rounded-lg;
+}
+
+.copyright {
+  @apply text-sm cursor-default;
+  position: fixed;
+  bottom: .2rem;
+  right: .6rem;
+  opacity: 0.1;
+  transition: all .3s;
+}
+
+.user-text {
+  /* position: fixed;
+  top: 2rem; */
+  @apply text-xl sm:text-2xl;
+  /* left: 3rem; */
+}
+.copyright:hover {
+  opacity: 1;
 }

@@ -29,8 +29,8 @@ const getRefreshToken = async () => {
     router.push('/auth?error=refresh_token')
   }
 
-  localStorage.setItem('access_token', response.accessToken);
-  localStorage.setItem('refresh_token', response.refreshToken);
+  localStorage.setItem('access_token', response.access_token);
+  localStorage.setItem('refresh_token', response.refresh_token);
 }
 
 
