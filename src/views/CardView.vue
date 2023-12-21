@@ -71,7 +71,7 @@
   
   console.log(data.value)
   
-  document.title = (data.value.item ? data.value.item.name + ' by ' + data.value.item.artists[0].name : 'Not playing') + ' | itsplaying'
+  document.title = (data.value.item ? data.value.item.name + ' by ' + data.value.item.artists[0] : 'Not playing') + ' | itsplaying'
   
   const colorThief = new ColorThief()
   
