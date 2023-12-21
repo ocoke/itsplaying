@@ -58,6 +58,7 @@
   const urlParams = new URLSearchParams(window.location.search)
   let user = urlParams.get('user')
   
+  
   const apiUrl =  '/api/get?id=' + urlParams.get('id')
   
   const data = ref({})

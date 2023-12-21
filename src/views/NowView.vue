@@ -7,14 +7,20 @@
       </div> -->
       <div class="cover w-full sm:w-1/2">
        
-        <img
+        <div class='img'>
+          <img
           :src="data.item.album.images[0].url"
           alt="album cover"
           ref="img"
           crossorigin="anonymous"
           width="480"
           height="480"
+          class=""
         />
+
+        <div class="w-full bg-gray-300 mt-7 mb-1 rounded-full h-1" v-if="showProgress" ref="progressBar">
+          <div class="bg-white h-1 rounded-full opacity-50" ref="progress" style="width: 0; transition: all 1.2s;"></div>
+        </div></div>
       </div>
       <div class="meta w-full sm:w-1/2">
         <div style="width: 100%;">
@@ -24,6 +30,9 @@
               >{{ i.name }}<span v-if="index != data.item.artists.length - 1">,&nbsp;</span></span
             >
           </div>
+                    
+          
+
         </div>
       </div>
     </div>
@@ -57,6 +66,7 @@ import ColorThief from 'colorthief'
 const urlParams = new URLSearchParams(window.location.search)
 let user = urlParams.get('user')
 
+const showProgress = urlParams.get('progress')
 
 const apiUrl = 'https://api.spotify.com/v1/me/player/currently-playing'
 const auths = 'Bearer ' + localStorage.getItem('access_token')
@@ -76,6 +86,8 @@ data.value = await fetch(apiUrl, {
 console.log(data.value)
 
 document.title = (data.value.item ? data.value.item.name + ' by ' + data.value.item.artists[0].name : 'Not playing') + ' | itsplaying'
+
+
 
 const colorThief = new ColorThief()
 
@@ -102,6 +114,21 @@ const img = ref()
 const trackTitle = ref()
 const trackArtists = ref()
 const copyright = ref()
+const progressBar = ref()
+const progress = ref()
+
+
+if (showProgress) {
+  const progressMs = data.value.progress_ms
+  const durationMs = data.value.item.duration_ms
+  localStorage.setItem('progress_ms', progressMs)
+  localStorage.setItem('duration_ms', durationMs)
+  const progressPercent = (progressMs / durationMs) * 100
+  console.log(progressPercent)
+  if (progress.value) {
+    progress.value.style.width = progressPercent + '%'
+  }
+}
 
 watch(img, () => {
   // change page icon
@@ -118,8 +145,8 @@ watch(img, () => {
   img.value.addEventListener('load', function () {
     const color = colorThief.getColor(img.value)
     console.log(color)
-    document.body.style.backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`
-    trackTitle.value.style.color = trackArtists.value.style.color = copyright.value.style.color = pickTextColor(
+    document.body.style.backgroundColor = progressBar.value.style.backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`
+    trackTitle.value.style.color = trackArtists.value.style.color = copyright.value.style.color = progress.value.style.backgroundColor = pickTextColor(
       color,
       '#FFFFFF',
       '#000000'
@@ -175,5 +202,18 @@ setInterval(async () => {
     .then((text) => (text ? JSON.parse(text) : {}))
 
   document.title = (data.value.item ? data.value.item.name + ' by ' + data.value.item.artists[0].name : 'Not playing') + ' | itsplaying'
+
+  // progress bar
+  if (showProgress) {
+    const progressMs = data.value.progress_ms
+    const durationMs = data.value.item.duration_ms
+    localStorage.setItem('progress_ms', progressMs)
+    localStorage.setItem('duration_ms', durationMs)
+    const progressPercent = (progressMs / durationMs) * 100
+    console.log(progressPercent)
+    if (progress.value) {
+      progress.value.style.width = progressPercent + '%'
+    }
+  }
 }, 5000)
 </script>

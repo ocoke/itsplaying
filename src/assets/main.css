@@ -44,7 +44,7 @@ main {
 .mp-now .track-artists {
   @apply text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl mt-6 opacity-65;
 }
-.mp-now img {
+.mp-now .img {
   max-width: 100%;
   overflow: hidden;
   @apply w-full sm:w-2/3 rounded-lg;
