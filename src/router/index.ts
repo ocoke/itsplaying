@@ -21,6 +21,11 @@ const router = createRouter({
       component: AuthView
     },
     {
+      path: '/share',
+      name: 'share',
+      component: () => import('../views/ShareView.vue')
+    },
+    {
       path: '/about',
       name: 'about',
       // route level code-splitting
