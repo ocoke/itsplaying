@@ -86,6 +86,7 @@
 
     const progressWidth = (progressMs / durationMs) * 100
 
+    console.log(progress.value)
     if (progress.value) {
       progress.value.style.width = progressWidth + '%'
     }
