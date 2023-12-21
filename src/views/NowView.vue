@@ -19,7 +19,7 @@
         />
 
         <div class="w-full bg-gray-300 mt-7 mb-1 rounded-full h-1" v-if="showProgress" ref="progressBar">
-          <div class="bg-white h-1 rounded-full opacity-50" ref="progress" style="width: 0; transition: all 1.2s;"></div>
+          <div class="bg-white h-1 rounded-full opacity-50" ref="progress" style="width: 0; transition: all 4.5s;"></div>
         </div></div>
       </div>
       <div class="meta w-full sm:w-1/2">
@@ -149,11 +149,14 @@ watch(img, () => {
     if (progressBar.value) {
       progressBar.value.style.backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`
     }
-    trackTitle.value.style.color = trackArtists.value.style.color = copyright.value.style.color = progress.value.style.backgroundColor = pickTextColor(
+    trackTitle.value.style.color = trackArtists.value.style.color = copyright.value.style.color = pickTextColor(
       color,
       '#FFFFFF',
       '#000000'
     )
+    if (progress.value) {
+      progress.value.style.backgroundColor = pickTextColor(color, '#FFFFFF', '#000000')
+    }
   })
   // }
 })
