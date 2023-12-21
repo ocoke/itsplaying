@@ -58,7 +58,7 @@
   const urlParams = new URLSearchParams(window.location.search)
   let user = urlParams.get('user')
   
-  const apiUrl = 'https://curly-space-tribble-5577wg9j4r7f7wrj-8000.app.github.dev' + '/api/get?id=' + urlParams.get('id')
+  const apiUrl =  '/api/get?id=' + urlParams.get('id')
   
   const data = ref({})
   
