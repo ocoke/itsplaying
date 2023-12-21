@@ -290,6 +290,7 @@ export default async function handler(
           );
         }
         access_token = refreshTokenResp.access_token;
+        if (refreshTokenResp.refresh_token) refresh_token = refreshTokenResp.refresh_token
         expires_at = new Date().getTime() + refreshTokenResp.expires_in * 1000;
         // write in new token
         const datas = {
