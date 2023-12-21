@@ -97,7 +97,7 @@ export default async function handler(req: Request): Response | Promise<Response
             "", {
             status: 307,
             headers: {
-                Location: (Deno.env.get('ITSPLAYING_FRONTEND') || 'https://itsplaying.vercel.app') + '/share?id=' + userResp.id
+                Location: (Deno.env.get('ITSPLAYING_FRONTEND') || 'https://itsplaying.deno.dev') + '/share?id=' + userResp.id
             }
         })
 
