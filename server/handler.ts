@@ -262,6 +262,7 @@ export default async function handler(
           method: "POST",
           headers: {
             Authorization: "Basic " + btoa(clientId + ":" + clientSecret),
+            'content-type': 'application/x-www-form-urlencoded',
           },
         })
           .then((res) => res.json())
@@ -290,7 +291,6 @@ export default async function handler(
         }
         access_token = refreshTokenResp.access_token;
         expires_at = new Date().getTime() + refreshTokenResp.expires_in * 1000;
-        refresh_token = refreshTokenResp.refresh_token;
         // write in new token
         const datas = {
           id: user.value.id,
@@ -319,7 +319,8 @@ export default async function handler(
     path.endsWith(".js") ||
     path.endsWith(".css") ||
     path.endsWith(".map") ||
-    path.endsWith(".ico")
+    path.endsWith(".ico") || 
+    path.endsWith(".jpg")
   ) {
     return serveDir(req, {
       fsRoot: "./dist",
