@@ -1,5 +1,5 @@
 import generateRandomString from './randomString.ts';
-import {serveDir} from "https://deno.land/std@0.188.0/http/file_server.ts";
+import { serveDir, serveFile } from "https://deno.land/std@0.188.0/http/file_server.ts";
 const reponseHeaders = {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
@@ -210,7 +210,14 @@ export default async function handler(req: Request): Response | Promise<Response
         }
     }
     // return await fetch((Deno.env.get('ITSPLAYING_FRONTEND') || 'https://itsplaying.vercel.app') + path)
-    return serveDir(req, {
-        fsRoot: "./dist",
-    });
+
+
+    // for vite output, serve from dist
+    if (path.endsWith('.js') || path.endsWith('.css') || path.endsWith('.map') || path.endsWith('.ico')) {
+        return serveDir(req, {
+            fsRoot: "./dist",
+        });
+    } else {
+        return serveFile(req, "./dist/index.html");
+    }
 }
