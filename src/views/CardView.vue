@@ -31,7 +31,7 @@
       <div v-else class="mp-now">
         <div class="cover w-full sm:w-1/2">
           <img
-            src="/blank.jpg"
+            src="https://itsplaying.vercel.app/blank.jpg"
             alt="album cover"
             ref="img"
             crossorigin="anonymous"
