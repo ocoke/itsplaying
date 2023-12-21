@@ -20,13 +20,38 @@
 > [!TIP]
 > As default, we provided a Spotify App to get your current playing status.
 
-- Visit [`/auth`](https://itsplaying.vercel.app/auth), and click `Sign in with Spotify` to sign in.
-- Then, sign in to your Spotify account and click `Agree` to grant `itsplaying` visit your status.
+- Visit [`/auth`](https://itsplaying.deno.dev/auth), and click `Sign in with Spotify` to sign in.
+- Then, sign in to your Spotify account and click `Agree` to grant `itsplaying` to visit your status.
 
 ![image](https://github.com/ocoke/itsplaying/assets/71591824/29278fb3-d0d5-4577-900b-dd7438b44465)
 
 - The app will automatically redirect you back to the homepage, if an error occurs, please try again.
-- Now, you can visit [`/now`](https://itsplaying.vercel.app/now) to get the current playing status.
+- Now, you can visit [`/now`](https://itsplaying.deno.dev/now) to get the current playing status.
+
+### 😀 Share
+
+- Visit [`/share`](https://itsplaying.deno.dev/share), type your server URL (you can keep default), and click `Share` to sign in.
+
+![image](https://github.com/ocoke/itsplaying/assets/71591824/aa7fbe99-36ea-4b27-9d37-96b11a7373aa)
+
+- After signing in, you can see the sharing URL.
+
+#### 🗒️ JSON Format
+
+```
+https://[server]/api/get?id=[id]
+https://itsplaying.deno.dev/api/get?id=31ldqmkw53rigxjzgmf5wht465u4
+```
+
+#### 🗒️ Sharing Page
+
+```
+https://[server]/card?id=[id]
+https://itsplaying.deno.dev/card?id=31ldqmkw53rigxjzgmf5wht465u4
+```
+
+
+
 
 ## 👨‍💻 Screenshots
 
