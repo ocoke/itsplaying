@@ -215,7 +215,7 @@ export default async function handler(
               "&album=" + encodeURIComponent(album),
         );
 
-      return new Response(rqUrl);
+      return await fetch(rqUrl);
     }
   }
 

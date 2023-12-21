@@ -35,7 +35,7 @@ const getRefreshToken = async () => {
 }
 
 
-if (!localStorage.getItem("access_token") && !localStorage.getItem("refresh_token") && !localStorage.getItem("code_verifier") && !localStorage.getItem("server_manage_id")) {
+if (!localStorage.getItem("access_token") && !localStorage.getItem("refresh_token") && !localStorage.getItem("code_verifier") && !localStorage.getItem("server_manage_id") && location.pathname != "/card" && location.pathname != "/auth") {
   router.push('/auth')
 } else {
   const expiresAt = localStorage.getItem("expires_at");
