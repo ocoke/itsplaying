@@ -70,8 +70,7 @@
     .then((text) => (text ? JSON.parse(text).data : {}))
   
   console.log(data.value)
-  
-  document.title = (data.value.item ? data.value.item.name + ' by ' + data.value.item.artists[0] : 'Not playing') + ' | itsplaying'
+
   
   const colorThief = new ColorThief()
   
@@ -134,8 +133,6 @@
     })
       .then((response) => response.text())
       .then((text) => (text ? JSON.parse(text).data : {}))
-  
-    document.title = (data.value.item ? data.value.item.name + ' by ' + data.value.item.artists[0].name : 'Not playing') + ' | itsplaying'
   }, 5000)
   </script>
   
