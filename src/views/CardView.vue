@@ -90,7 +90,6 @@
       console.log(progress.value)
       if (progress.value) {
         progress.value.style.width = progressWidth + '%'
-        progress.value.style.transition = 'all 4.5s'
       }
     }
   }, 200)
@@ -162,6 +161,7 @@
     const progressMs = data.value.item.progress_ms
     const progressWidth = (progressMs / durationMs) * 100
     if (progress.value) {
+      progress.value.style.transition = 'all 4.5s'
       progress.value.style.width = progressWidth + '%'
     }
    }
