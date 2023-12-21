@@ -80,15 +80,17 @@
   
   console.log(data.value)
 
-  const durationMs = data.value.item.duration_ms
-  const progressMs = data.value.item.progress_ms
+  if (data.value.item) {
+    const durationMs = data.value.item.duration_ms
+    const progressMs = data.value.item.progress_ms
 
-  const progressWidth = (progressMs / durationMs) * 100
+    const progressWidth = (progressMs / durationMs) * 100
 
-  if (progress.value) {
-    progress.value.style.width = progressWidth + '%'
+    if (progress.value) {
+      progress.value.style.width = progressWidth + '%'
+    }
+
   }
-
 
 
   const colorThief = new ColorThief()
@@ -133,8 +135,9 @@
         '#FFFFFF',
         '#000000'
       )
+      
       if (progress.value) {
-        progress.value.style.backgroundColor = pickTextColor(color, '#FFFFFF', '#000000')
+        progress.value.style.backgroundColor = trackTitle.value.style.color
       }
     })
     // }
@@ -151,12 +154,14 @@
       .then((response) => response.text())
       .then((text) => (text ? JSON.parse(text).data : {}))
     
+   if (data.value.item) {
     const durationMs = data.value.item.duration_ms
     const progressMs = data.value.item.progress_ms
     const progressWidth = (progressMs / durationMs) * 100
     if (progress.value) {
       progress.value.style.width = progressWidth + '%'
     }
+   }
   }, 5000)
   </script>
   
