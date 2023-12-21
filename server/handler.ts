@@ -1,7 +1,7 @@
 import generateRandomString from './randomString.ts';
 import { serveDir, serveFile } from "https://deno.land/std@0.188.0/http/file_server.ts";
 const reponseHeaders = {
-    'Content-Type': 'application/json',
+    'Content-Type': 'application/json; charset=utf-8',
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Origin, Content-Type, Accept',
@@ -174,12 +174,21 @@ export default async function handler(req: Request): Response | Promise<Response
 
             // fetch now playing data
             const nowPlayingUri: string = 'https://api.spotify.com/v1/me/player/currently-playing'
-            const dataResp = await fetch(nowPlayingUri, {
+            const dataRespString = await fetch(nowPlayingUri, {
                 method: 'GET',
                 headers: {
                     Authorization: 'Bearer ' + access_token
                 }
-            }).then(res => res.json())
+            }).then(res => res.text())
+            if (dataRespString === '' || !dataRespString) {
+                return new Response(JSON.stringify({
+                    code: 404,
+                    data: 'Not Playing'
+                }), {
+                    headers: reponseHeaders
+                })
+            }
+            const dataResp = JSON.parse(dataRespString)
             if (dataResp.error) {
                 return new Response(JSON.stringify({
                     code: 400,
