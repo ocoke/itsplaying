@@ -2,7 +2,7 @@
   
     <main>
 
-      <div v-if="data.item" class="mp-now">
+      <div v-if="data && data.item" class="mp-now">
         <!-- <div class="user-text pb-12 pl-6" v-if="user">
           <p>{{ user }} is playing:</p>
         </div> -->
@@ -31,7 +31,7 @@
       <div v-else class="mp-now">
         <div class="cover w-full sm:w-1/2">
           <img
-            src="https://itsplaying.vercel.app/blank.jpg"
+            src="/blank.jpg"
             alt="album cover"
             ref="img"
             crossorigin="anonymous"
