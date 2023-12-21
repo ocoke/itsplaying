@@ -119,15 +119,17 @@ const progress = ref()
 
 
 if (showProgress) {
-  const progressMs = data.value.progress_ms
-  const durationMs = data.value.item.duration_ms
-  localStorage.setItem('progress_ms', progressMs)
-  localStorage.setItem('duration_ms', durationMs)
-  const progressPercent = (progressMs / durationMs) * 100
-  console.log(progressPercent)
-  if (progress.value) {
-    progress.value.style.width = progressPercent + '%'
-  }
+  setTimeout(() => {
+    const progressMs = data.value.progress_ms
+    const durationMs = data.value.item.duration_ms
+    localStorage.setItem('progress_ms', progressMs)
+    localStorage.setItem('duration_ms', durationMs)
+    const progressPercent = (progressMs / durationMs) * 100
+    console.log(progressPercent)
+    if (progress.value) {
+      progress.value.style.width = progressPercent + '%'
+    }
+  }, 200)
 }
 
 watch(img, () => {

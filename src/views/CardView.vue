@@ -80,18 +80,19 @@
   
   console.log(data.value)
 
-  if (data.value.item) {
-    const durationMs = data.value.item.duration_ms
-    const progressMs = data.value.item.progress_ms
+  setTimeout(() => {
+    if (data.value.item) {
+      const durationMs = data.value.item.duration_ms
+      const progressMs = data.value.item.progress_ms
 
-    const progressWidth = (progressMs / durationMs) * 100
+      const progressWidth = (progressMs / durationMs) * 100
 
-    console.log(progress.value)
-    if (progress.value) {
-      progress.value.style.width = progressWidth + '%'
+      console.log(progress.value)
+      if (progress.value) {
+        progress.value.style.width = progressWidth + '%'
+      }
     }
-
-  }
+  }, 200)
 
 
   const colorThief = new ColorThief()
