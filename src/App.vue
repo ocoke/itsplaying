@@ -28,10 +28,10 @@ const getRefreshToken = async () => {
     // handle error
     router.push('/auth?error=refresh_token')
     return false
+  } else {
+    localStorage.setItem('access_token', response.access_token);
+    localStorage.setItem('refresh_token', response.refresh_token);
   }
-
-  localStorage.setItem('access_token', response.access_token);
-  localStorage.setItem('refresh_token', response.refresh_token);
 }
 
 
@@ -39,7 +39,7 @@ if (!localStorage.getItem("access_token") && !localStorage.getItem("refresh_toke
   router.push('/auth')
 } else {
   const expiresAt = localStorage.getItem("expires_at");
-  if (new Date().getTime() > Number(expiresAt)) {
+  if (new Date().getTime() > Number(expiresAt) && location.pathname != "/card") {
     getRefreshToken()
   }
 }

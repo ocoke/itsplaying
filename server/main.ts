@@ -2,4 +2,6 @@
 
 import handler from './handler.ts'
 
-Deno.serve(handler)
+Deno.serve({
+    port: Deno.env.get('PORT') || 8080,
+}, handler)

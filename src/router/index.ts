@@ -21,6 +21,11 @@ const router = createRouter({
       component: AuthView
     },
     {
+      path: '/card',
+      name: 'card',
+      component: () => import('../views/CardView.vue')
+    },
+    {
       path: '/share',
       name: 'share',
       component: () => import('../views/ShareView.vue')
