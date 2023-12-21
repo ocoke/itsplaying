@@ -20,7 +20,7 @@
           />
   
           <div class="w-full bg-gray-300 mt-7 mb-1 rounded-full h-1" v-show="showProgress" ref="progressBar">
-            <div class="bg-white h-1 rounded-full opacity-50" ref="progress" style="width: 0; transition: all 4.5s;"></div>
+            <div class="bg-white h-1 rounded-full opacity-50" ref="progress" style="width: 0;"></div>
           </div></div>
         </div>
         <div class="meta w-full sm:w-1/2">
@@ -90,6 +90,7 @@
       console.log(progress.value)
       if (progress.value) {
         progress.value.style.width = progressWidth + '%'
+        progress.value.style.transition = 'all 4.5s'
       }
     }
   }, 200)
