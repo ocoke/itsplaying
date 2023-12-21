@@ -182,7 +182,7 @@ export default async function handler(req: Request): Response | Promise<Response
             }).then(res => res.text())
             if (dataRespString === '' || !dataRespString) {
                 return new Response(JSON.stringify({
-                    code: 404,
+                    code: 204,
                     data: 'Not Playing'
                 }), {
                     headers: reponseHeaders
