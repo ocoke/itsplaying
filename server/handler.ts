@@ -159,7 +159,7 @@ export default async function handler(req: Request): Response | Promise<Response
                     })
                 }
                 access_token = refreshTokenResp.access_token
-                expires_at = new Date().getTime() + refreshTokenResp.expires_in
+                expires_at = new Date().getTime() + refreshTokenResp.expires_in * 1000
                 refresh_token = refreshTokenResp.refresh_token
                 // write in new token
                 const datas = {
