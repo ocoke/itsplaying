@@ -21,6 +21,11 @@ const router = createRouter({
       component: AuthView
     },
     {
+      path: '/card-template',
+      name: 'card',
+      component: () => import('../views/CardTemplateView.vue')
+    },
+    {
       path: '/card',
       name: 'card',
       component: () => import('../views/CardView.vue')

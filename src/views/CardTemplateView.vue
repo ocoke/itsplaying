@@ -1,15 +1,14 @@
 <template>
   
     <main>
-
-      <div v-if="data.item" class="mp-now">
+      <div v-if="name && album && artists" class="mp-now">
         <!-- <div class="user-text pb-12 pl-6" v-if="user">
           <p>{{ user }} is playing:</p>
         </div> -->
         <div class="cover w-full sm:w-1/2">
          
           <img
-            :src="data.item.images[0].url"
+            :src="album"
             alt="album cover"
             ref="img"
             crossorigin="anonymous"
@@ -19,10 +18,10 @@
         </div>
         <div class="meta w-full sm:w-1/2">
           <div style="width: 100%;">
-            <div class="track-title" ref="trackTitle">{{ data.item.name }}</div>
+            <div class="track-title" ref="trackTitle">{{ name }}</div>
             <div class="track-artists" ref="trackArtists">
-              <span v-for="(i, index) in data.item.artists" v-bind:key="i"
-                >{{ i }}<span v-if="index != data.item.artists.length - 1">,&nbsp;</span></span
+              <span v-for="(i, index) in artists.split(',')" v-bind:key="i"
+                >{{ i }}<span v-if="index != artists.split(',').length - 1">,&nbsp;</span></span
               >
             </div>
           </div>
@@ -56,22 +55,10 @@
   import ColorThief from 'colorthief'
   
   const urlParams = new URLSearchParams(window.location.search)
-  let user = urlParams.get('user')
-  
-  const apiUrl = 'https://curly-space-tribble-5577wg9j4r7f7wrj-8000.app.github.dev' + '/api/get?id=' + urlParams.get('id')
-  
-  const data = ref({})
-  
-  // when page loads, fetch data
-  data.value = await fetch(apiUrl, {
-    method: 'GET',
-  })
-    .then((response) => response.text())
-    .then((text) => (text ? JSON.parse(text).data : {}))
-  
-  console.log(data.value)
-  
-  document.title = (data.value.item ? data.value.item.name + ' by ' + data.value.item.artists[0].name : 'Not playing') + ' | itsplaying'
+  const name = urlParams.get('name')
+  const artists = urlParams.get('artists')
+  const album = urlParams.get('album')
+
   
   const colorThief = new ColorThief()
   
@@ -123,19 +110,5 @@
     })
     // }
   })
-
-  
-  // setInterval, fetch data every 10 seconds
-  
-  setInterval(async () => {
-
-    data.value = await fetch(apiUrl, {
-      method: 'GET',
-    })
-      .then((response) => response.text())
-      .then((text) => (text ? JSON.parse(text).data : {}))
-  
-    document.title = (data.value.item ? data.value.item.name + ' by ' + data.value.item.artists[0].name : 'Not playing') + ' | itsplaying'
-  }, 5000)
   </script>
   

@@ -119,107 +119,109 @@ export default async function handler(
     });
   }
 
-  if (path.startsWith("/api/get.png")) {
-    const id = url.searchParams.get("id")
-    const webstackScreenshotAPI = Deno.env.get("WEBSTACK_SCREENSHOT_API") ||
-      "https://webstack-screenshot.vercel.app";
-    const kv = await Deno.openKv();
-    const user = await kv.get(["user", id]);
-    if (!user.value) {
-      return new Response(
-        JSON.stringify({
-          code: 404,
-          data: "Not Found",
-        }),
-        {
-          headers: reponseHeaders,
-        },
-      );
-    } else {
-      let access_token = user.value.access_token;
-      let expires_at = user.value.expires_at;
-      let refresh_token = user.value.refresh_token;
-      // console.log(access_token, expires_at, refresh_token)
-      if (!access_token || !expires_at || !refresh_token) {
-        return new Response(
-          JSON.stringify({
-            code: 404,
-            data: "Not Found",
-          }),
-          {
-            headers: reponseHeaders,
-          },
-        );
-      }
+  // if (path.startsWith("/api/get.png")) {
+  //   const id = url.searchParams.get("id")
+  //   const webstackScreenshotAPI = Deno.env.get("WEBSTACK_SCREENSHOT_API") ||
+  //     "https://webstack-screenshot.vercel.app";
+  //   const kv = await Deno.openKv();
+  //   const user = await kv.get(["user", id]);
+  //   if (!user.value) {
+  //     return new Response(
+  //       JSON.stringify({
+  //         code: 404,
+  //         data: "Not Found",
+  //       }),
+  //       {
+  //         headers: reponseHeaders,
+  //       },
+  //     );
+  //   } else {
+  //     let access_token = user.value.access_token;
+  //     let expires_at = user.value.expires_at;
+  //     let refresh_token = user.value.refresh_token;
+  //     // console.log(access_token, expires_at, refresh_token)
+  //     if (!access_token || !expires_at || !refresh_token) {
+  //       return new Response(
+  //         JSON.stringify({
+  //           code: 404,
+  //           data: "Not Found",
+  //         }),
+  //         {
+  //           headers: reponseHeaders,
+  //         },
+  //       );
+  //     }
 
-      if (new Date().getTime() > expires_at) {
-        // expired, refresh token
-        // console.log('expired')
-        let tokenUri: string = "https://accounts.spotify.com/api/token";
-        tokenUri += "?grant_type=refresh_token";
-        tokenUri += "&refresh_token=" + encodeURIComponent(refresh_token);
-        const refreshTokenResp = await fetch(tokenUri, {
-          method: "POST",
-          headers: {
-            Authorization: "Basic " + btoa(clientId + ":" + clientSecret),
-          },
-        })
-          .then((res) => res.json())
-          .catch((err) => {
-            return new Response(
-              JSON.stringify({
-                code: 400,
-                data: err,
-              }),
-              {
-                headers: reponseHeaders,
-              },
-            );
-          });
+  //     if (new Date().getTime() > expires_at) {
+  //       // expired, refresh token
+  //       // console.log('expired')
+  //       let tokenUri: string = "https://accounts.spotify.com/api/token";
+  //       tokenUri += "?grant_type=refresh_token";
+  //       tokenUri += "&refresh_token=" + encodeURIComponent(refresh_token);
+  //       const refreshTokenResp = await fetch(tokenUri, {
+  //         method: "POST",
+  //         headers: {
+  //           Authorization: "Basic " + btoa(clientId + ":" + clientSecret),
+  //         },
+  //       })
+  //         .then((res) => res.json())
+  //         .catch((err) => {
+  //           return new Response(
+  //             JSON.stringify({
+  //               code: 400,
+  //               data: err,
+  //             }),
+  //             {
+  //               headers: reponseHeaders,
+  //             },
+  //           );
+  //         });
 
-        if (refreshTokenResp.error) {
-          return new Response(
-            JSON.stringify({
-              code: 400,
-              data: refreshTokenResp.error,
-            }),
-            {
-              headers: reponseHeaders,
-            },
-          );
-        }
-        access_token = refreshTokenResp.access_token;
-        expires_at = new Date().getTime() + refreshTokenResp.expires_in * 1000;
-        refresh_token = refreshTokenResp.refresh_token;
-        // write in new token
-        const datas = {
-          id: user.value.id,
-          access_token: access_token,
-          refresh_token: refresh_token,
-          expires_at: expires_at,
-        };
+  //       if (refreshTokenResp.error) {
+  //         return new Response(
+  //           JSON.stringify({
+  //             code: 400,
+  //             data: refreshTokenResp.error,
+  //           }),
+  //           {
+  //             headers: reponseHeaders,
+  //           },
+  //         );
+  //       }
+  //       access_token = refreshTokenResp.access_token;
+  //       expires_at = new Date().getTime() + refreshTokenResp.expires_in * 1000;
+  //       refresh_token = refreshTokenResp.refresh_token;
+  //       if (access_token && expires_at && refresh_token) {
+  //           // write in new token
+  //         const datas = {
+  //           id: user.value.id,
+  //           access_token: access_token,
+  //           refresh_token: refresh_token,
+  //           expires_at: expires_at,
+  //         };
 
-        const result = await kv.set(["user", user.value.id], datas);
-      }
+  //         const result = await kv.set(["user", user.value.id], datas);
+  //       }
+  //     }
 
-      const currentPlaying = await getCurrentPlaying(access_token);
-      const name = currentPlaying.data.item.name;
-      const artists = currentPlaying.data.item.artists.join(",");
-      const album = currentPlaying.data.item.images[1].url;
-      let rqUrl = webstackScreenshotAPI + "/";
-      rqUrl += "?url=" +
-        encodeURIComponent(
-          Deno.env.get("ITSPLAYING_FRONTEND") || "https://itsplaying.deno.dev" +
-              "/card?name=" + encodeURIComponent(name) +
-              "&artists=" + encodeURIComponent(artists) +
-              "&album=" + encodeURIComponent(album),
-        );
+  //     const currentPlaying = await getCurrentPlaying(access_token);
+  //     const name = currentPlaying.data.item.name;
+  //     const artists = currentPlaying.data.item.artists.join(",");
+  //     const album = currentPlaying.data.item.images[1].url;
+  //     let rqUrl = webstackScreenshotAPI + "/";
+  //     rqUrl += "?url=" +
+  //       encodeURIComponent(
+  //         Deno.env.get("ITSPLAYING_FRONTEND") || "https://itsplaying.deno.dev" +
+  //             "/card?name=" + encodeURIComponent(name) +
+  //             "&artists=" + encodeURIComponent(artists) +
+  //             "&album=" + encodeURIComponent(album),
+  //       );
 
-      return await fetch(rqUrl);
-    }
-  }
+  //     return new Response(rqUrl);
+  //   }
+  // }
 
-  if (path.startsWith("/api/get.json")) {
+  if (path.startsWith("/api/get")) {
     const id = url.searchParams.get("id");
     const kv = await Deno.openKv();
     const user = await kv.get(["user", id]);
