@@ -35,5 +35,5 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: "itsplaying"
-          entrypoint: "server/main.ts"
+          entrypoint: "main.ts"
           root: "server" # 📝 Update the root if necessary
