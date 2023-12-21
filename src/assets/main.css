@@ -47,9 +47,11 @@ main {
 .mp-now .img {
   max-width: 100%;
   overflow: hidden;
-  @apply w-full sm:w-2/3 rounded-lg;
+  @apply w-full sm:w-2/3;
 }
-
+.mp-now .img img {
+  @apply rounded-lg;
+}
 .copyright {
   @apply text-sm cursor-default;
   position: fixed;

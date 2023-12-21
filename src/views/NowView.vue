@@ -145,7 +145,10 @@ watch(img, () => {
   img.value.addEventListener('load', function () {
     const color = colorThief.getColor(img.value)
     console.log(color)
-    document.body.style.backgroundColor = progressBar.value.style.backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`
+    document.body.style.backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`
+    if (progressBar.value) {
+      progressBar.value.style.backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`
+    }
     trackTitle.value.style.color = trackArtists.value.style.color = copyright.value.style.color = progress.value.style.backgroundColor = pickTextColor(
       color,
       '#FFFFFF',

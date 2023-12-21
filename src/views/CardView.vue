@@ -8,14 +8,20 @@
         </div> -->
         <div class="cover w-full sm:w-1/2">
          
-          <img
+          <div class='img'>
+            <img
             :src="data.item.images[0].url"
             alt="album cover"
             ref="img"
             crossorigin="anonymous"
             width="480"
             height="480"
+            class=""
           />
+  
+          <div class="w-full bg-gray-300 mt-7 mb-1 rounded-full h-1" v-if="showProgress" ref="progressBar">
+            <div class="bg-white h-1 rounded-full opacity-50" ref="progress" style="width: 0; transition: all 1.2s;"></div>
+          </div></div>
         </div>
         <div class="meta w-full sm:w-1/2">
           <div style="width: 100%;">
@@ -57,7 +63,9 @@
   
   const urlParams = new URLSearchParams(window.location.search)
   let user = urlParams.get('user')
-  
+  const showProgress = urlParams.get('progress') == 'true'
+  const progressBar = ref()
+  const progress = ref()
   
   const apiUrl =  '/api/get?id=' + urlParams.get('id')
   
@@ -72,7 +80,17 @@
   
   console.log(data.value)
 
-  
+  const durationMs = data.value.item.duration_ms
+  const progressMs = data.value.item.progress_ms
+
+  const progressWidth = (progressMs / durationMs) * 100
+
+  if (progress.value) {
+    progress.value.style.width = progressWidth + '%'
+  }
+
+
+
   const colorThief = new ColorThief()
   
   const pickTextColor = (bgColor, lightColor, darkColor) => {
@@ -100,14 +118,6 @@
   const copyright = ref()
   
   watch(img, () => {
-    // change page icon
-    var link = document.querySelector("link[rel~='icon']");
-    if (!link) {
-        link = document.createElement('link');
-        link.rel = 'icon';
-        document.head.appendChild(link);
-    }
-    link.href = img.value.src
   
     // change text color and page background color
   
@@ -115,6 +125,9 @@
       const color = colorThief.getColor(img.value)
       console.log(color)
       document.body.style.backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`
+      if (progressBar.value) {
+        progressBar.value.style.backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`
+      }
       trackTitle.value.style.color = trackArtists.value.style.color = copyright.value.style.color = pickTextColor(
         color,
         '#FFFFFF',
@@ -134,6 +147,13 @@
     })
       .then((response) => response.text())
       .then((text) => (text ? JSON.parse(text).data : {}))
+    
+    const durationMs = data.value.item.duration_ms
+    const progressMs = data.value.item.progress_ms
+    const progressWidth = (progressMs / durationMs) * 100
+    if (progress.value) {
+      progress.value.style.width = progressWidth + '%'
+    }
   }, 5000)
   </script>
   
