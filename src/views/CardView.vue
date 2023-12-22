@@ -36,6 +36,7 @@
       </div>
       <div v-else class="mp-now">
         <div class="cover w-full sm:w-1/2">
+          <div class='img'>
           <img
             src="/blank.jpg"
             alt="album cover"
@@ -44,6 +45,7 @@
             width="480"
             height="480"
           />
+        </div>
         </div>
         <div class="meta w-full sm:w-1/2">
           <div style="width: 100%;">
