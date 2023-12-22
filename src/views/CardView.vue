@@ -46,7 +46,9 @@
           />
         </div>
         <div class="meta w-full sm:w-1/2">
+          <div style="width: 100%;">
           <div class="track-title" ref="trackTitle">Not playing</div>
+          </div>
           <!-- <div class="track-artists" ref="trackArtists"><span v-for="(i, index) in data.item.artists" v-bind:key="i">{{ i.name }}<span v-if="index != data.item.artists.length - 1">,&nbsp;</span></span></div> -->
         </div>
       </div>
