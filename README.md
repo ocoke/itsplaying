@@ -1,11 +1,11 @@
 # `itsplaying`
 
-> 🎵 `itsplaying` is a web app and an open API that can get the current music that's playing and display it to other people.
+> 🎵 Get the current music that's playing and display it to other people.
 
 ## ✨ Features
 
 - [x] Now Playing Screen, with cover, artist, name and a matching background color.
-- [ ] Public API, integrate with your app (personal page), show the music that you're playing to others.
+- [x] Public API, integrate with your app (GitHub README), show the music that you're playing to others.
 - [ ] Other features? [New Issue](https://github.com/ocoke/itsplaying/issues/new).
 
 ## 🙌 Getting Started
@@ -48,8 +48,22 @@ https://itsplaying.deno.dev/api/get?id=31ldqmkw53rigxjzgmf5wht465u4
 ```
 https://[server]/card?id=[id]
 https://itsplaying.deno.dev/card?id=31ldqmkw53rigxjzgmf5wht465u4
+https://itsplaying.deno.dev/card?id=31ldqmkw53rigxjzgmf5wht465u4&progress=true
 ```
 
+> With query `&progress=true` can enable playing progress.
+
+#### 🗒️ GitHub README
+
+Because of the dynamic background color, `itsplaying` is using screenshots to display in GitHub README.
+
+We're still exploring other good ways to show the picture.
+
+> I'm using a Web screenshot API ([/Lete114/WebStack-Screenshot](https://github.com/Lete114/WebStack-Screenshot)).
+
+```markdown
+[![An error occurred when fetching images. Refresh the page to try again, or click here to open the link. ](https://webstack-screenshot.vercel.app/?url=https%3A%2F%2Fitsplaying.deno.dev%2Fcard%3Fid%3D31ldqmkw53rigxjzgmf5wht465u4%26progress%3Dtrue&viewport=1200x600&timeout=0&cache=5)](https://itsplaying.deno.dev/card?id=31ldqmkw53rigxjzgmf5wht465u4&progress=true)
+```
 
 
 
